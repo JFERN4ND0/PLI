@@ -7,6 +7,7 @@ public class Juego extends JFrame implements ActionListener {
     private JButton opc1, opc2, opc3, opc4;
     private JLabel pregunta;
     private String color;
+    private int puntaje = 0, intentos = 10;
 
     public Juego() {
         setLayout(new GridLayout(3,2));
@@ -31,15 +32,15 @@ public class Juego extends JFrame implements ActionListener {
         opc3.addActionListener(this);
         add(opc3);
 
-        opc4 = new JButton("");
+        opc4 = new JButton();
         opc4.setBounds(250, 250, 250, 250);
         opc4.setBackground(new Color(250, 250, 0));
         opc4.addActionListener(this);
         add(opc4);
 
-        color = "Selecciona el color " + scolor();
+        color = scolor();
 
-        pregunta = new JLabel(color, Label.RIGHT);
+        pregunta = new JLabel("Selecciona el color " + color);
         pregunta.setFont(new Font("Andale Mono", 3, 20));
         pregunta.setForeground(new Color(0, 0, 0));
         add(pregunta);
@@ -63,15 +64,39 @@ public class Juego extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == opc1){
-            JOptionPane.showMessageDialog(null, "Debes Ingresar tu nombre");
+            if(color.equals("Rojo")) {
+            	JOptionPane.showMessageDialog(null,"Correcto");
+            	puntaje++;
+            	
+            }
+        } else if(e.getSource() == opc2){
+        	if (color.equals("Verde")) {
+        		JOptionPane.showMessageDialog(null,"Correcto");
+        		puntaje++;
+        		
+        	}
+        } else if(e.getSource() == opc3){
+        	if (color.equals("Azul")) {
+        		JOptionPane.showMessageDialog(null,"Correcto");
+        		puntaje++;
+        		
+        	}
+        } else if(e.getSource() == opc4){
+        	if (color.equals("Amarillo")) {
+        		JOptionPane.showMessageDialog(null,"Correcto");
+        		puntaje++;
+        		
+        	}
         }
-    }
+        intentos--;
+        this.setVisible(false);
 
-    public static void jugar(){
-        Juego v2 = new Juego();
-        v2.setBounds(0, 0, 500, 500);
-        v2.setVisible(true);
-        v2.setResizable(false);
+        if(intentos >= 0) {
+        	Juego v1 = new Juego();
+        	v1.setBounds(0, 0, 500, 500);
+        	v1.setVisible(true);
+        	v1.setResizable(true);
+        } else JOptionPane.showMessageDialog(null,"tu puntuacion es: " + puntaje);
     }
 
     public static void main(String[] args) {
